@@ -22,6 +22,9 @@ stderr and no stdout output. Future MCP integration must reserve stdout for
 protocol messages. GitHub Actions runs formatting, Clippy, and tests on stable
 Rust; hosted CI requires network access for checkout and toolchain setup.
 
+Hosted CI remains **unverified** until a remote is configured, the code is pushed,
+and GitHub Actions runs. Only local checks have passed.
+
 ## Current layout
 
 ```text
