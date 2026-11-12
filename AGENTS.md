@@ -1,7 +1,22 @@
 # Project guidance
 
-This is a dependency-free Rust 2024 foundation for a parallel downloader MCP
-server. Keep the package name `mcp-tools` and the single-crate structure.
+This is a Rust 2024 foundation for a parallel downloader MCP server. The current
+scaffold has no dependencies. Keep the package name `mcp-tools` and the
+single-crate structure.
+
+## Dependencies
+
+Dependencies are allowed. Prefer a reputable, maintained crate over a custom implementation when it meaningfully improves correctness, security, or maintainability.
+
+Before recommending or adding a dependency, discover the current options from live, relevant sources—not pretrained knowledge alone. For Rust crates, check the registry and crate metadata (for example, with `cargo search` and `cargo info`, or the crates.io listing), then consult the crate’s official documentation. Verify that the candidate is compatible with this project’s Rust edition and toolchain, and check relevant features, maintenance signals, and known security advisories.
+
+Explain the dependency’s purpose, why it fits better than practical alternatives, the version selected, and important trade-offs. Report which sources and checks were used, and what they showed. Phrase security findings narrowly—for example, “no relevant advisories found in the sources checked”—rather than claiming a dependency is vulnerability-free.
+
+Choose a suitable stable version compatible with the project; do not chase updates simply to be on the newest release.
+
+If a check cannot be completed, disclose that limitation; don’t present it as verified or replace a justified dependency with a fragile custom implementation just to avoid it.
+
+Don’t treat the absence of prior authorization as a blanket prohibition on proposing or using a justified dependency.
 
 ## Architecture boundaries
 
@@ -21,6 +36,16 @@ MCP protocol stdout must contain no diagnostic output. Send status messages and
 diagnostics to stderr; reserve stdout for protocol messages once MCP is added.
 
 ## Development workflow
+
+Before editing, run `git status --short` and inspect `git diff` and `git diff --cached`. Preserve changes that were already present.
+
+Make changes in small, related steps. After each step, inspect `git diff` for the affected files; use the diff—not memory or a summary—as the record of what changed.
+
+If a change causes a problem, inspect the diff and correct only the faulty changes. Use `git restore -- <file>` only when you have checked that **all** uncommitted changes to that file can be discarded. For a tracked file with both wanted and unwanted changes, restore only selected hunks with `git restore -p -- <file>` or edit the file directly. Never restore the whole working tree to fix one file.
+
+Never use broad restore, reset, or clean commands.
+
+Don’t make checkpoint commits unless the user has authorized commits. If a change cannot be safely separated from pre-existing work, stop and report the conflict rather than guessing.
 
 After each task, run and report `git diff --stat` so the change set can be checked
 against the claimed changes. Distinguish existing changes from the current task.
