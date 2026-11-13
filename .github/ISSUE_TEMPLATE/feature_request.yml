@@ -1,0 +1,22 @@
+name: Feature request
+description: Propose downloader or MCP behavior.
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    attributes:
+      label: Problem
+      description: What user or maintainer problem does this solve?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Proposed behavior
+      description: Describe the expected API or observable behavior.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Design considerations
+      description: Note range semantics, retries, resume behavior, MCP boundaries, or alternatives.

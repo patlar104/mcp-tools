@@ -17,6 +17,9 @@ cargo test --offline
 cargo run --offline --quiet
 ```
 
+`mise run rust-check` runs the same Rust checks. Use `mise run docs-check` for
+Markdown or Mermaid changes, or `mise run check` for both sets of checks.
+
 The binary exits successfully with `mcp-tools: downloader MCP scaffold only.` on
 stderr and no stdout output. Future MCP integration must reserve stdout for
 protocol messages. GitHub Actions runs formatting, Clippy, and tests on stable
@@ -24,6 +27,22 @@ Rust; hosted CI requires network access for checkout and toolchain setup.
 
 Hosted CI remains **unverified** until a remote is configured, the code is pushed,
 and GitHub Actions runs. Only local checks have passed.
+
+## Mermaid documentation
+
+The Mermaid CLI is a local documentation development dependency. Install its
+browser runtime and render the embedded README diagram with:
+
+```sh
+mise exec -- npm ci
+mise exec -- npm run docs:install-browser
+mise exec -- npm run docs:check
+```
+
+Alternatively, run `mise run docs-check`, which runs all three commands. Choose
+one approach; do not run the direct commands and the wrapper task together.
+
+The rendered SVG is written under the ignored `target/mermaid/` directory.
 
 ## Current layout
 

@@ -1,0 +1,14 @@
+[tools]
+node = "24.21.0"
+
+[tasks.rust-check]
+description = "Run the Rust formatting, lint, test, and binary checks"
+run = "cargo build --offline && cargo fmt --check && cargo clippy --offline --all-targets -- -D warnings && cargo test --offline && cargo run --offline --quiet"
+
+[tasks.docs-check]
+description = "Install Mermaid tooling and render-check Markdown diagrams"
+run = "npm ci && npm run docs:install-browser && npm run docs:check"
+
+[tasks.check]
+description = "Run all Rust and documentation checks"
+depends = ["rust-check", "docs-check"]

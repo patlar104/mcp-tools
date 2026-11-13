@@ -14,6 +14,10 @@ Explain the dependency’s purpose, why it fits better than practical alternativ
 
 Choose a suitable stable version compatible with the project; do not chase updates simply to be on the newest release.
 
+Treat lower-bound version constraints such as `>=22.13.0` as compatibility
+floors, not as preferred or exclusive versions. Select and justify a specific
+version separately based on the project's toolchain policy and evidence.
+
 If a check cannot be completed, disclose that limitation; don’t present it as verified or replace a justified dependency with a fragile custom implementation just to avoid it.
 
 Don’t treat the absence of prior authorization as a blanket prohibition on proposing or using a justified dependency.

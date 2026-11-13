@@ -1,0 +1,36 @@
+name: Copilot Setup Steps
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/copilot-setup-steps.yml
+      - mise.toml
+      - mise.lock
+      - package.json
+      - package-lock.json
+  pull_request:
+    paths:
+      - .github/workflows/copilot-setup-steps.yml
+      - mise.toml
+      - mise.lock
+      - package.json
+      - package-lock.json
+
+permissions:
+  contents: read
+
+jobs:
+  copilot-setup-steps:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: jdx/mise-action@v5
+      - name: Validate Mermaid documentation
+        run: mise run docs-check
+      - name: Install stable Rust
+        run: rustup toolchain install stable --profile minimal --component rustfmt --component clippy
+      - name: Use stable Rust
+        run: rustup default stable
