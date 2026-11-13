@@ -28,6 +28,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: jdx/mise-action@v5
+      - name: Use runner Chrome sandbox
+        run: |
+          chrome="$(command -v google-chrome)"
+          sandbox="$(dirname "$(readlink -f "$chrome")")/chrome-sandbox"
+          test -u "$sandbox"
+          printf 'PUPPETEER_EXECUTABLE_PATH=%s\n' "$chrome" >> "$GITHUB_ENV"
       - name: Validate Mermaid documentation
         run: mise run docs-check
       - name: Install stable Rust
